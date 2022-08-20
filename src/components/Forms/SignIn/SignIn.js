@@ -1,4 +1,4 @@
-import React from 'react';
+import {useContext} from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
@@ -7,6 +7,7 @@ import styles from './SignIn.module.scss';
 import FormikControl from '../../../form-templates/FormikControl/FormikControl'
 import CustomButton from '../../CustomButton/CustomButton'
 import { signInWithGooglePopup ,createUserDocumentFromAuth, logInWithEmailAndPassword } from '../../../utilities/firebase/firebase'
+import { UserContext } from '../../../context/user';
 
 const SignIn = () => {
 
@@ -27,7 +28,7 @@ const SignIn = () => {
       .matches(/(?=.*[0-9])/, 'Must contain a number')
   });
 
-  
+  const { setCurrentUser } = useContext(UserContext);
 
   const onSubmit = async (values) => {
     const { email, password } = values;
@@ -42,6 +43,7 @@ const SignIn = () => {
   const signInWithGoogle = async() => {
     const { user } = await signInWithGooglePopup();  
     const userDocRef = await createUserDocumentFromAuth(user)
+    setCurrentUser(user);
   }
 
 

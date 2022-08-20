@@ -1,11 +1,13 @@
-
+import { useContext } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 
 import styles from './Navigation.module.scss'
-
+import { UserContext } from '../../context/user';
 
 const Navigation = () => {
-  return (
+  const { currentUser } = useContext(UserContext);
+  console.log('in nav component', currentUser)
+    return (
     <>
       <div className={styles.navigation}>
         <Link className='logo-container' to='/'>
