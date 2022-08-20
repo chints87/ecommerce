@@ -1,0 +1,39 @@
+.input{
+   display: flex;
+   flex-direction: column;  
+   width: 100%;
+   margin-bottom: 1.5rem;   
+}
+
+.formInput{
+  display: flex;
+  height: 3rem;
+  font-size: 1rem;
+  margin: 0.5rem 0;  
+  padding-left: 1rem;
+  border:solid 0.5px #ccc;
+  border-radius: 10px;
+  outline: none;    
+  font-family: inherit;
+}
+
+.formInput:focus{
+    border:solid 1px black;
+}
+
+.formInputLabel{
+  color: black;
+  padding-left:0.5rem;
+}
+
+.option{
+    padding: 1rem;      
+}
+
+.errorMessage{
+  margin: 0;
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--grey-02);
+}

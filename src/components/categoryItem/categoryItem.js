@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './categoryItem.module.scss'
+import styles from './CategoryItem.module.scss'
 
 function CategoryItem({ category }) {
   const { title, imageUrl } = category  

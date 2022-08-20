@@ -1,0 +1,143 @@
+.signUp{  
+    text-decoration:none; 
+    margin: auto; 
+    outline: none;
+    width: 100%; 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; 
+   }
+   
+   .signInHeading{
+    font-size: 2em;
+    font-weight: 800;
+    margin: 1em 0;
+    margin-bottom: 0em;
+    color: black;
+   }
+   
+   .signInSubHeading{
+    font-size: 1.25em;
+    font-weight: 200;
+    margin: 0.5em 0;
+    margin-bottom: 1.5em;
+    color: black;
+   }
+   
+   .link{
+     text-decoration: none;
+   }
+   
+   .errorMessage{
+     margin: 0;
+     margin-right: 0.8rem;
+     text-align: center;
+     padding-left: 0.5rem;
+     font-size: 0.75rem;
+     color: red;
+      /*  display: flex;
+       justify-content: flex-end;
+       width: 90%; */
+   }
+   
+   .formInput{
+     display: flex;
+     width: 238px;
+     height: 3rem;
+     font-size: 1rem;
+     margin: 0.5rem auto;
+     margin-bottom: 0;  
+     padding-left: 1.5rem;
+     border:solid 0.5px #ccc;
+     border-radius: 10px;
+     outline: none;  
+   }
+   
+   .formInputLabel{
+     color: black;
+     text-align: center;
+   }
+   
+   .formDisplay{
+     display: flex;
+     flex-direction: column;
+     /* align-items: center; */
+     width: 50%;
+     margin-top: 1rem;
+     /* padding: 0 1rem;  */
+   }
+   
+   .fieldInputDisplay{
+     display: flex;
+     flex-direction: column;
+     /* width: 70%; */
+     height: 95px;
+   }
+   
+   .formButton{
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       width: 100%;    
+   }
+   
+   @media screen and (min-width:530px) and (max-width: 1240px){
+     .signUp{
+       flex-direction: column;
+       align-items: center;
+       width: 100%;
+     }
+   
+     .formDisplay{
+       width: 100%;
+     }
+   
+     .formInput{
+       height: 2rem;
+     }
+   }
+   
+   
+   
+   @media screen and (max-width:530px){
+     .signUp {  
+       text-decoration:none; 
+       margin: 0px 10px;
+       margin-top: 10px;
+       padding: 0px 0px;
+       font-size: 1em;
+       font-weight: 500;
+       outline: none;   
+     }
+   
+     .formInput{
+       height: 3rem;
+       border-radius: 10rem;
+     }
+   
+     .formDisplay{
+       width: 90%;
+       margin: 0;
+     }
+   
+     .formButton{
+       justify-content: center; 
+     }
+   
+     .signUpText{
+       text-transform: uppercase;
+       font-weight: var(--fw-md);
+     }
+   
+     .formButton{
+       margin-top: 1rem;
+     }
+     
+     .formInputDisplay{
+       width: 100%;
+     }
+     
+   
+   }
