@@ -1,7 +1,7 @@
 import React from 'react'
 import CATEGORIES from '../../data'
-import CategoryItem from '../categoryItem/categoryItem'
-import styles from './directory.module.scss'
+import CategoryItem from '../CategoryItem/CategoryItem'
+import styles from './Directory.module.scss'
 
 function Directory() {
   return (

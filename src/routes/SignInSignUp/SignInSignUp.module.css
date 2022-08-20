@@ -1,0 +1,23 @@
+.signInSignUp{
+  display:flex; 
+  flex-direction: column;  
+  position: relative;
+  top: var(--header-ht);  
+  justify-content: center;
+  align-items: top;
+  margin-left: auto;
+  margin-right: auto;  
+  cursor: pointer;  
+  color:black;  
+  overflow-x: hidden;
+}
+
+@media screen and (min-width: 530px){
+  .signInSignUp{
+    width: 85%;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+
