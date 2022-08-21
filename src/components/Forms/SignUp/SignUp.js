@@ -1,6 +1,8 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { registerUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../../utilities/firebase/firebase';
+import { useContext } from 'react';
+import { UserContext } from '../../../context/user';
 import * as Yup from 'yup';
 
 import styles from './SignUp.module.scss';
@@ -33,11 +35,13 @@ const SignUp = () => {
         .required('Required'),
   });
 
+  const { setCurrentUser} = useContext(UserContext);
+
   const onSubmit = async(values, onSubmitProps) => {   
     const {displayName, email, password } = values;
     try {
       const {user} = await registerUserWithEmailAndPassword(email, password);
-      console.log(user);
+      setCurrentUser(user)
       const userDocRef = await createUserDocumentFromAuth(user,{displayName});
     } catch (error) {
       console.log(error);
