@@ -1,9 +1,11 @@
-import React from 'react'
+import { useContext } from 'react';
+import { CartIconContext } from '../../context/cartIcon';
 
 import styles from './ProductCard.module.scss'
 import CustomButton from '../../components/CustomButton/CustomButton';
 
 function ProductCard({product}) {
+  const { addItemToCart } = useContext(CartIconContext);
   const {name, price, imageUrl} = product;
   return (
     <div className={styles.container}>        
@@ -12,7 +14,7 @@ function ProductCard({product}) {
             <span className={styles.name}>{name}</span>
             <span className={styles.price}>{price}</span>
         </div>
-        <CustomButton type="button" className="btn">Add to cart</CustomButton>  
+        <CustomButton type="button" className="btn" onClick={() => addItemToCart(product)}>Add to cart</CustomButton>  
     </div>
   )
 }
