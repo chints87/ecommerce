@@ -4,11 +4,11 @@ import { CartIconContext } from '../../context/cartIcon';
 import styles from './CartIcon.module.scss';
 
 export default function CartIcon() {
-  const { cartIcon, setCartIcon } = useContext(CartIconContext);
+  const { cartIcon, cartCountItem, setCartIcon } = useContext(CartIconContext);
   return (
     <div className={styles.container} onClick={() => setCartIcon(!cartIcon)}>
       <ShoppingIcon className={styles.shoppingIcon}/>
-      <span className={styles.itemCount}>0</span>
+      <span className={styles.itemCount}>{cartCountItem}</span>
     </div>
   )
 }
