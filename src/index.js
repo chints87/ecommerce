@@ -6,15 +6,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './context/user';
 import { ProductProvider } from './context/product';
+import { CartIconProvider } from './context/cartIcon';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <UserProvider>
-        <ProductProvider>
-          <App />
-        </ProductProvider>
+      <UserProvider>        
+          <ProductProvider>
+            <CartIconProvider>
+              <App /> 
+            </CartIconProvider>        
+          </ProductProvider>        
       </UserProvider>
     </BrowserRouter>   
   </React.StrictMode>
