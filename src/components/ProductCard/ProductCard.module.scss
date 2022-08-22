@@ -1,0 +1,21 @@
+.container{
+    display: flex;
+    flex-direction: column;    
+}
+
+.image{
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.Addbutton{
+    position: absolute
+}
