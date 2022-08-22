@@ -33,12 +33,13 @@ const SignUp = () => {
         .required('Required'),
   });
 
+ 
+
   const onSubmit = async(values, onSubmitProps) => {   
     const {displayName, email, password } = values;
     try {
       const {user} = await registerUserWithEmailAndPassword(email, password);
-      console.log(user);
-      const userDocRef = await createUserDocumentFromAuth(user,{displayName});
+      await createUserDocumentFromAuth(user,{displayName});
     } catch (error) {
       console.log(error);
     }  
