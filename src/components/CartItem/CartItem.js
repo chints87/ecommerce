@@ -4,11 +4,15 @@ import styles from './CartItem.module.scss'
 
 function CartItem({ cartItem }) {
   console.log(cartItem)
-  const { name, quantity } = cartItem;
+  const { name, imageUrl, price,quantity } = cartItem;
   return (
     <div className={styles.container}>
-      <h2>{name}</h2>
-      <span>{quantity}</span>
+      <img src={imageUrl} alt={name} />
+      <div className={styles.itemDetails}>
+        <span className={styles.name}>{name}</span>
+        <span className={styles.price}>{quantity} X {price}</span>
+      </div>
+      
     </div>
   )
 }

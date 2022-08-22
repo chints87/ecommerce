@@ -1,5 +1,17 @@
 import { createContext, useState } from "react";
 
+const addItem = (cartItems, itemToAdd) => {
+    const existingCartItem = cartItems.find((cartItem) => cartItem.id === itemToAdd.id);
+    if(existingCartItem) {
+       return cartItems.map((cartItem) => 
+        cartItem.id === itemToAdd.id 
+        ? {...cartItem, quantity: cartItem.quantity + 1} 
+        : cartItem        
+       )
+    }       
+    return [...cartItems, { ...itemToAdd, quantity: 1 }];
+}
+
 export const CartIconContext = createContext({
     cartIcon: false,
     setCartIcon: () => {},
@@ -21,14 +33,3 @@ export const CartIconProvider = ({children}) => {
 )
 }
 
-const addItem = (cartItems, itemToAdd) => {
-    const existingCartItem = cartItems.find((cartItem) => cartItem.id === itemToAdd.id);
-    if(existingCartItem) {
-       return cartItems.map((cartItem) => 
-        cartItem.id === itemToAdd.id 
-        ? {...cartItem, quantity: cartItem.quantity + 1} 
-        : cartItem        
-       )
-    }       
-    return [...cartItems, { ...itemToAdd, quantity: 1 }];
-}
