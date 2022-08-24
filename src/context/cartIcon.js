@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useReducer } from "react";
 
 const addItem = (cartItems, itemToAdd) => {
     const existingCartItem = cartItems.find((cartItem) => cartItem.id === itemToAdd.id);
@@ -38,31 +38,75 @@ export const CartIconContext = createContext({
     totalItemsCost: 0,
 });
 
+export const CART_ACTION_TYPES = {
+    TOOGLE_CART_ICON: 'TOOGLE_CART_ICON',
+    UPDATE_CART_ITEMS: 'UPDATE_CART_ITEMS'
+    
+}
+
+
+const cartReducer = (state,action) => {
+    const { type, payload } = action
+    switch(type){
+        case CART_ACTION_TYPES.TOOGLE_CART_ICON:
+         return{
+            ...state,
+            cartIcon: payload
+        }
+        case CART_ACTION_TYPES.UPDATE_CART_ITEMS:
+         return{
+            ...state,
+            ...payload
+        }
+         default:
+            throw new Error('error')
+    }
+}
+
+const INITIAL_STATE = {
+    cartIcon: false,
+    cartItems: [],
+    cartCountItem: 0,
+    totalItemsCost: 0
+}
+
 export const CartIconProvider = ({children}) => {
-    const [cartIcon, setCartIcon] = useState(false);
-    const [cartItems, setCartItems] = useState([]);
-    const [cartCountItem, setCartCountItem] = useState(0);
-    const [totalItemsCost, setTotalItemsCost] = useState(0);
+    // const [cartIcon, setCartIcon] = useState(false);
+    const [state, dispatch] = useReducer(cartReducer,INITIAL_STATE)
+    const { cartIcon, cartItems, cartCountItem, totalItemsCost} = state
+    
+    const setCartIcon = (bool) => dispatch({
+        type: CART_ACTION_TYPES.TOOGLE_CART_ICON,
+        payload: bool
+    })
+
+    const updateCartItems = (newCartItems) => {
+        const newCartCount = newCartItems.reduce((total, cartItem) => total + cartItem.quantity, 0); 
+        const totalCost = newCartItems.reduce((total, cartItem) => total + cartItem.price * cartItem.quantity, 0); 
+        
+        return dispatch({ type: CART_ACTION_TYPES.UPDATE_CART_ITEMS, 
+        payload: {
+            cartItems: newCartItems,
+            cartCountItem: newCartCount,
+            totalItemsCost: totalCost
+        }})
+    }
+
     const addItemToCart = (itemToAdd) => {
-        setCartItems(addItem(cartItems, itemToAdd));
+        const newCartItems = addItem(cartItems, itemToAdd);
+        updateCartItems(newCartItems)
     }
     const removeItemFromCart = (itemToRemove) => {
-        setCartItems(removeItem(cartItems,itemToRemove))
+        const newCartItems = removeItem(cartItems,itemToRemove)
+        updateCartItems(newCartItems)
     }
     const deleteItemFromCart = (itemToDelete) => {
-        setCartItems(cartItems.filter((cartItem) => cartItem.id !== itemToDelete.id))    }
+        const newCartItems = cartItems.filter((cartItem) => cartItem.id !== itemToDelete.id);
+        updateCartItems(newCartItems)  
+     }
 
 
-    useEffect(() => {
-        const newCartCount = cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);    
-        setCartCountItem(newCartCount);        
-    }, [cartItems]);    
-
-    useEffect(() => {        
-        const totalItemsCost = cartItems.reduce((total, cartItem) => total + cartItem.price * cartItem.quantity, 0);       
-        setTotalItemsCost(totalItemsCost);
-    }, [cartItems]);    
-
+   
     return (
     <CartIconContext.Provider value={{cartIcon, setCartIcon, cartItems, 
         addItemToCart, cartCountItem, removeItemFromCart,deleteItemFromCart, totalItemsCost}}>
