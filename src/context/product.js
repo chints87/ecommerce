@@ -5,12 +5,12 @@ import { createContext, useState, useEffect } from 'react';
 import {getCategoriesAndDocuments } from '../utilities/firebase/firebase'
 
 export const ProductContext = createContext({
-    products: [],
-    setProducts: () => {},
+    categoriesMap: [],
+    setCategoriesMap: () => {},
 });
 
 export const ProductProvider = ({ children }) => {
-  const[products, setProducts] = useState([]);
+  const[categoriesMap, setCategoriesMap] = useState([]);
 //   To upload static data from front end. Should be done only
 //   once
   /* useEffect(() => {
@@ -19,12 +19,13 @@ export const ProductProvider = ({ children }) => {
   useEffect(() => {
     const categoryMapData = async() => {
        const categoryMap = await getCategoriesAndDocuments()
-       console.log(categoryMap)
+       setCategoriesMap(categoryMap)
+       
     }
     categoryMapData()
   },[])
     return (
-        <ProductContext.Provider value={{products, setProducts}}>
+        <ProductContext.Provider value={{categoriesMap, setCategoriesMap}}>
             {children}
         </ProductContext.Provider>
     )      
