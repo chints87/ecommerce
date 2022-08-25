@@ -5,9 +5,11 @@ import storage from 'redux-persist/lib/storage'
 
 import { rootReducer } from './root-reducer';
 
-const middleWares = [logger]
+const middleWares = [process.env.NODE_ENV === 'development' && logger].filter(Boolean)
 
-const composedEnhancers = compose(applyMiddleware(...middleWares))
+const composedEnhancer = (process.env.NODE_ENV === 'development' && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
+
+const composedEnhancers = composedEnhancer(applyMiddleware(...middleWares))
 
 const persistConfig = {
     key: rootReducer,
