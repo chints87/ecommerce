@@ -40,8 +40,7 @@ export const CartIconContext = createContext({
 
 export const CART_ACTION_TYPES = {
     TOOGLE_CART_ICON: 'TOOGLE_CART_ICON',
-    UPDATE_CART_ITEMS: 'UPDATE_CART_ITEMS'
-    
+    UPDATE_CART_ITEMS: 'UPDATE_CART_ITEMS'    
 }
 
 

@@ -1,10 +1,17 @@
-import { useContext } from 'react'
-import { CartIconContext } from '../../context/cartIcon'
+// import { useContext } from 'react'
+// import { CartIconContext } from '../../context/cartIcon'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { addItemToCart, removeItemFromCart, deleteItemFromCart} from '../../store/cart/cartActions';
+import { selectCartItems, selectTotalCostItems} from '../../store/cart/cartSelector';
 
 import styles from './Checkout.module.scss'
 
 function Checkout() {
-  const { cartItems, addItemToCart, removeItemFromCart, deleteItemFromCart, totalItemsCost } = useContext(CartIconContext)
+  // const { cartItems, addItemToCart, removeItemFromCart, deleteItemFromCart, totalItemsCost } = useContext(CartIconContext)
+  const cartItems = useSelector(selectCartItems)
+  const totalItemsCost = useSelector(selectTotalCostItems)
+  const dispatch = useDispatch()
   return (
     <div className={styles.container}>
      {cartItems.map((cartItem) => {
@@ -13,10 +20,10 @@ function Checkout() {
         <div key={id}>
             <h2>{name}</h2>
             <p>{quantity}</p>
-            <p onClick={() => addItemToCart(cartItem)}>Add</p>
-            <p onClick={() => removeItemFromCart(cartItem)}>Remove</p>
+            <p onClick={() => dispatch(addItemToCart(cartItems,cartItem))}>Add</p>
+            <p onClick={() => dispatch(removeItemFromCart(cartItems,cartItem))}>Remove</p>
             <p>{price}</p>
-            <p onClick={() => deleteItemFromCart(cartItem)}>Delete item</p>
+            <p onClick={() => dispatch(deleteItemFromCart(cartItems,cartItem))}>Delete item</p>
         </div>
        )
      })}
