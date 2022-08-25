@@ -1,8 +1,8 @@
 import React from 'react'
 import ProductCard from '../ProductCard/ProductCard'
 import styles from './CategoryPreview.module.scss'
-function CategoryPreview({title, products}) {
 
+function CategoryPreview({title, products}) {
   return (
     <div>
       <h2>
