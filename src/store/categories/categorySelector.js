@@ -7,6 +7,11 @@ export const selectCategories = createSelector(
     (categorySlice) => categorySlice.categories
 )
 
+export const selectCategoriesIsLoading = createSelector(
+    [selectCategoryReducer],
+    (categorySlice) => categorySlice.isLoading
+)
+
 export const selectCategoriesMap = createSelector(
     [selectCategories],
     (categories) => categories.reduce((acc,category) => {
