@@ -7,13 +7,13 @@ import {Routes , Route} from 'react-router-dom'
 import CategoriesPreview from '../CategoriesPreview/CategoriesPreview'
 import Category from '../../components/Category/Category'
 
-import { fetchCategoriesAsync } from '../../store/categories/categoriesActions'
+import { fetchCategoriesStart } from '../../store/categories/categoriesActions'
 
 function Shop() {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(fetchCategoriesAsync())
-  },[])
+    dispatch(fetchCategoriesStart())
+  })
   return (
   <Routes>
     <Route index element={<CategoriesPreview />} />
