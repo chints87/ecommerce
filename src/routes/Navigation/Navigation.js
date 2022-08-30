@@ -1,17 +1,22 @@
 // import { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux/es/exports';
 
 import styles from './Navigation.module.scss'
 // import { UserContext } from '../../context/user';
 // import { CartIconContext } from '../../context/cartIcon';
-import { signOutUser } from '../../utilities/firebase/firebase';
+// import { signOutUser } from '../../utilities/firebase/firebase';
+
 import CartIcon from '../../components/CartIcon/CartIcon';
 import CartDropDown from '../../components/CartDropDown/CartDropDown';
 import { selectIsCartOpen } from '../../store/cart/cartSelector';
 
+import { signOutStart } from '../../store/user/userActions';
+
 const Navigation = () => {
   // const { currentUser } = useContext(UserContext);
+  const dispatch = useDispatch()
   const currentUser = useSelector((state) => state.user.currentUser)
   const cartIcon = useSelector(selectIsCartOpen)
     return (
@@ -25,7 +30,7 @@ const Navigation = () => {
             SHOP
           </Link>
           { currentUser ? (
-            <div className={styles.navLink} onClick={() => signOutUser()}>SIGN OUT</div>)
+            <div className={styles.navLink} onClick={() => dispatch(signOutStart())}>SIGN OUT</div>)
             : <Link className='nav-link' to='/sign-in'>
             SIGN IN
           </Link>

@@ -1,6 +1,7 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
-import { registerUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../../utilities/firebase/firebase';
+// import { registerUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../../utilities/firebase/firebase';
 import * as Yup from 'yup';
 
 import styles from './SignUp.module.scss';
@@ -8,8 +9,10 @@ import styles from './SignUp.module.scss';
 import FormikControl from '../../../form-templates/FormikControl/FormikControl'
 import CustomButton from '../../CustomButton/CustomButton'
 
-const SignUp = () => {
+import { signUpStart } from '../../../store/user/userActions';
 
+const SignUp = () => {
+  const dispatch = useDispatch()
   const initialValues = {
     displayName:'',
     email: '',
@@ -37,12 +40,8 @@ const SignUp = () => {
 
   const onSubmit = async(values, onSubmitProps) => {   
     const {displayName, email, password } = values;
-    try {
-      const {user} = await registerUserWithEmailAndPassword(email, password);
-      await createUserDocumentFromAuth(user,{displayName});
-    } catch (error) {
-      console.log(error);
-    }  
+    dispatch(signUpStart(email,password, displayName))
+  
     
     onSubmitProps.resetForm();
   };
