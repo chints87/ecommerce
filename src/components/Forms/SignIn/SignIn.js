@@ -1,5 +1,6 @@
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
 
 import styles from './SignIn.module.scss';
 
@@ -7,8 +8,11 @@ import FormikControl from '../../../form-templates/FormikControl/FormikControl'
 import CustomButton from '../../CustomButton/CustomButton'
 import { signInWithGooglePopup , logInWithEmailAndPassword } from '../../../utilities/firebase/firebase'
 
+import { signInWithGoogle, signInWithEmail } from '../../../store/user/userActions';
+
 
 const SignIn = () => {
+  const dispatch = useDispatch()
 
   const initialValues = {
     email: '',
@@ -28,19 +32,19 @@ const SignIn = () => {
   });
 
   
-
+  
   const onSubmit = async (values) => {
     const { email, password } = values;
     try {
-      await logInWithEmailAndPassword(email, password);
+      dispatch(signInWithEmail(email,password))
       
     } catch (error) {
       console.log(error);
     }
   };
 
-  const signInWithGoogle = async() => {
-    await signInWithGooglePopup();  
+  const googleSignIn = async() => {
+    dispatch(signInWithGoogle())
     
    
   }
@@ -77,7 +81,7 @@ const SignIn = () => {
               >
                 SignIn
               </CustomButton>
-              <CustomButton className='btn' type="button" onClick={signInWithGoogle}>Sign In with google</CustomButton>
+              <CustomButton className='btn' type="button" onClick={googleSignIn}>Sign In with google</CustomButton>
 
             </Form>
           );
