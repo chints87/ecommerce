@@ -31,7 +31,7 @@ function PaymentForm() {
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({ amount: amount * 100 , name: currentUser ? currentUser : 'Guest' })
+      body: JSON.stringify({ amount: amount * 100 , name: currentUser ? currentUser.displayName : 'Guest' })
     }).then((res) => res.json());
 
     
