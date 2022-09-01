@@ -1,6 +1,7 @@
 // import { useContext } from 'react'
 // import { CartIconContext } from '../../context/cartIcon'
 import { useSelector, useDispatch } from 'react-redux'
+import PaymentForm from '../../components/PaymentForm/PaymentForm';
 
 import { addItemToCart, removeItemFromCart, deleteItemFromCart} from '../../store/cart/cartActions';
 import { selectCartItems, selectTotalCostItems} from '../../store/cart/cartSelector';
@@ -28,6 +29,7 @@ function Checkout() {
        )
      })}
      <span>Total : {totalItemsCost}</span>
+     <PaymentForm />
     </div>
   )
 }
