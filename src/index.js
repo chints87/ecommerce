@@ -10,9 +10,12 @@ import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './context/user';
 import { CategoryProvider } from './context/category';
 import { CartIconProvider } from './context/cartIcon';
+import { Elements } from '@stripe/react-stripe-js'
 
 
 import { store, persistor } from './store/store'
+import { stripePromise } from './utilities/stripe/stripe';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,7 +26,9 @@ root.render(
           {/* <UserProvider>         */}
               {/* <CategoryProvider> */}
                 {/* <CartIconProvider> */}
+                <Elements stripe={stripePromise}>
                   <App /> 
+                </Elements>                  
                 {/* </CartIconProvider>         */}
               {/* </CategoryProvider>   */}      
           {/* </UserProvider> */}
