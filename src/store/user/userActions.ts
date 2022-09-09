@@ -1,4 +1,5 @@
 import { USER_ACTION_TYPES } from "./userActionTypes"
+import { User } from "firebase/auth"
 import { UserData, AdditionalInfo } from "../../utilities/firebase/firebase"
 import { Action, ActionWithPayload, createAction, withMatcher } from "../../utilities/reducer/reducer"
 
@@ -21,7 +22,7 @@ export const signInWithEmail = withMatcher((email : string, password : string) =
     createAction(USER_ACTION_TYPES.SIGN_IN_EMAIL_START, {email, password}))
 
 export type SignInSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_SUCCESS, UserData>    
-export const signInSuccess = withMatcher((user : UserData) => 
+export const signInSuccess = withMatcher((user : UserData & {id : string}) => 
     createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user)
 )
 
@@ -34,8 +35,8 @@ export const signUpStart = withMatcher((email : string, password : string ,displ
     createAction(USER_ACTION_TYPES.SIGN_UP_START, {email, password, displayName})
  ))
 
-export type SignUpSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_SUCCESS,{user: UserData, additionalInfo: AdditionalInfo} >    
-export const signUpSuccess = withMatcher((user: UserData, additionalInfo: AdditionalInfo) => (
+export type SignUpSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_SUCCESS,{user: User, additionalInfo: AdditionalInfo} >    
+export const signUpSuccess = withMatcher((user: User, additionalInfo: AdditionalInfo) => (
     createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS, {user, additionalInfo})))
 
 export type SignUpFailure = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_FAILURE,{ error: Error} >    

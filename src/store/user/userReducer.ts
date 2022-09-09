@@ -15,7 +15,7 @@ const INITIAL_STATE : UserState = {
     error: null
 }
 
-export const userReducer = (state = INITIAL_STATE,action = {} as AnyAction) => {
+export const userReducer = (state = INITIAL_STATE,action = {} as AnyAction) : UserState => {
     if(signInSuccess.match(action)){
         return {
             ...state,
