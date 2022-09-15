@@ -1,3 +1,4 @@
+import { User } from "firebase/auth"
 import { USER_ACTION_TYPES } from "./userActionTypes"
 import { AdditionalInformation, UserData } from "../../utilities/firebase/firebase"
 import { createAction, withMatcher, Action, ActionWithPayload } from "../../utilities/reducer/reducer"
@@ -25,7 +26,7 @@ export const signInWithEmail = withMatcher((email: string, password: string) : S
 ))
 
 export type SignInSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_SUCCESS, UserData>
-export const signInSuccess = withMatcher((user : UserData): SignInSuccess => createAction(
+export const signInSuccess = withMatcher((user : UserData & { id: string} ): SignInSuccess => createAction(
     USER_ACTION_TYPES.SIGN_IN_SUCCESS,
      user
 ))
@@ -40,8 +41,8 @@ export type SignUpStart = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_START, { e
 export const signUpStart = withMatcher((email: string,password: string,displayName: string) : SignUpStart => createAction(
      USER_ACTION_TYPES.SIGN_UP_START, {email, password, displayName}))
 
-export type SignUpSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_EMAIL_START, { user: UserData, additionalInfo: AdditionalInformation}>     
-export const signUpSuccess = withMatcher((user: UserData, additionalInfo: AdditionalInformation) => createAction(
+export type SignUpSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_EMAIL_START, { user: User, additionalInfo: AdditionalInformation}>     
+export const signUpSuccess = withMatcher((user: User, additionalInfo: AdditionalInformation) => createAction(
     USER_ACTION_TYPES.SIGN_UP_SUCCESS,
     {user, additionalInfo}
  ))
