@@ -11,6 +11,7 @@ import { UserProvider } from './context/user';
 import { CategoryProvider } from './context/category';
 import { CartIconProvider } from './context/cartIcon';
 import { Elements } from '@stripe/react-stripe-js'
+import * as serviceWorker from './service-worker'
 
 
 import { store, persistor } from './store/store'
@@ -38,6 +39,7 @@ root.render(
   </React.StrictMode>
 );
 
+serviceWorker.register()
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
