@@ -1,8 +1,8 @@
-import React from 'react'
+import {memo} from 'react'
 
 import styles from './CartItem.module.scss'
 
-function CartItem({ cartItem }) {
+const CartItem  = memo(({ cartItem }) => {
   console.log(cartItem)
   const { name, imageUrl, price,quantity } = cartItem;
   return (
@@ -11,10 +11,9 @@ function CartItem({ cartItem }) {
       <div className={styles.itemDetails}>
         <span className={styles.name}>{name}</span>
         <span className={styles.price}>{quantity} X {price}</span>
-      </div>
-      
+      </div>      
     </div>
   )
-}
+})
 
 export default CartItem
