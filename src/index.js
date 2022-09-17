@@ -11,7 +11,7 @@ import { UserProvider } from './context/user';
 import { CategoryProvider } from './context/category';
 import { CartIconProvider } from './context/cartIcon';
 import { Elements } from '@stripe/react-stripe-js'
-import * as serviceWorker from './service-worker'
+import * as serviceWorker from './serviceWorkerRegistration'
 
 
 import { store, persistor } from './store/store'
