@@ -19,6 +19,7 @@ const SignInSignUp = lazy(() => import('./routes/SignInSignUp/SignInSignUp'))
 const Checkout = lazy(() => import('./routes/Checkout/Checkout'))
 
 function App() {
+  // Variable used to dispatch actions
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(checkUserSession())

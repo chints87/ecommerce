@@ -10,11 +10,14 @@ export type UserState = {
     readonly error: Error | null;
 } 
 
+// Set up inital state to be used when the application
+// runs the first time 
 const INITIAL_STATE : UserState = {
     currentUser: null,
     isLoading: false,
     error: null
 }
+
 
 export const userReducer = (state = INITIAL_STATE,action : AnyAction) => {
     if(signInSuccess.match(action)){

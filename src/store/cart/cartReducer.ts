@@ -7,6 +7,8 @@ export type CartState = {
     readonly cartItems : CartItem[] 
 }
 
+// Set up inital state to be used when the application
+// runs the first time 
 const INITIAL_STATE : CartState = {
     cartIcon: false,
     cartItems: [],

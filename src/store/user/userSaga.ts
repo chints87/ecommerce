@@ -11,10 +11,13 @@ import { SignInWithEmail, SignUpStart, SignUpSuccess } from './userActions'
 import { signInSuccess, signInFailure, signUpFailure, signUpSuccess, signOutSuccess, 
   signOutFailure } from './userActions'
 
+
 export function* getSnapShotFromUserAuth(userAuth: User, additionalInfo?: AdditionalInformation){
     try{
+      // Obtain user data from db from userAuth credentials and additional information 
       const userSnapShot = yield* call(createUserDocumentFromAuth, userAuth, additionalInfo)
       if(userSnapShot){
+        // Call the 'SIGN_IN_SUCCESS' action and pass parameters to it
         yield* put(signInSuccess({id: userSnapShot.id, ...userSnapShot.data()}))
       }      
     }catch(error){
@@ -38,12 +41,13 @@ export function* checkUserSession(){
 }
 
 // SignIn with email and password
+// The payload from the 'SIGN_IN_EMAIL_START' is passed in this function
 export function* userAuthEmailAndPasswordSignIn({payload : {email, password}} : SignInWithEmail){
   try{
-    // const {email, password} = action.payload
     const userCredential = yield* call(logInWithEmailAndPassword, email, password)
     if(userCredential){
       const { user }  = userCredential
+      // Triggers the getSnapShopFromUserAuth function to obtain user data from the db
       yield* call(getSnapShotFromUserAuth, user)
     }     
   }catch(error){
@@ -51,6 +55,7 @@ export function* userAuthEmailAndPasswordSignIn({payload : {email, password}} : 
   }  
 }
 
+// Listens for the 'SiGN_IN_EMAIL_START' action and triggers the userAuthEmailAndPasswordSignIn function
 export function* onSignInWithEmailAndPassword(){
   yield* takeLatest(USER_ACTION_TYPES.SIGN_IN_EMAIL_START, userAuthEmailAndPasswordSignIn)
 }
@@ -72,22 +77,28 @@ export function* onSignInWithGoogle(){
 
 
 
-// Sign Up
+// SIGN UP SAGAS
+// Over here the getSnapShotFromUserAuth function is called with user and 
+// additionalInfo as parameters
 export function* onSignInAfterSignUp({payload: {user, additionalInfo}} : SignUpSuccess){
-  // const{ user, additionalInfo} = action.payload
   yield* call(getSnapShotFromUserAuth, user, additionalInfo)
 }
 
+// Listens to the 'SIGN_UP_SUCCESS' Action and calls onSignInAfterSignUp and passes
+// payload to it
 export function* onSignUpSuccess(){
   yield* takeLatest(USER_ACTION_TYPES.SIGN_UP_SUCCESS, onSignInAfterSignUp)
 }
 
+// This function accepts the input parameters
+// passed as payload in the 'SIGN_UP_START' action
 export function* onUserSignUp({payload: {email, password, displayName}}: SignUpStart){
   // const { email, password, displayName} = action.payload
   try{
    const userCredential = yield* call(registerUserWithEmailAndPassword, email, password)
    if(userCredential){
     const { user } = userCredential
+    // Call the 'SIGN_UP_SUCCESS' action
     yield* put(signUpSuccess(user, { displayName }))
    }
   
@@ -96,6 +107,8 @@ export function* onUserSignUp({payload: {email, password, displayName}}: SignUpS
   }
 }
 
+// This function listens for the for the 'SIGN_UP_START' action and calls
+// onUserSignup function
 export function* onSignUpStart(){
   yield* takeLatest(USER_ACTION_TYPES.SIGN_UP_START, onUserSignUp)
 }

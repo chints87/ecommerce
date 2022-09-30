@@ -3,6 +3,8 @@ import { CATEGORIES_ACTION_TYPES, Category } from "./categoriesActionTypes"
 
 import { CategoryAction, fetchCategoriesStart, fetchCategoriesSuccess, fetchCategoriesFailed } from "./categoriesActions"
 
+// Set up inital state to be used when the application
+// runs the first time 
 export type CategoriesState = {
     readonly categories: Category[];
     readonly isLoading: boolean;

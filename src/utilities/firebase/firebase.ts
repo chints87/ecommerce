@@ -17,16 +17,24 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 
+// Set up google login access to the application
 const provider = new GoogleAuthProvider();
+// Prompt the user to select a google account to provide 
+// credentials to access the application
 provider.setCustomParameters({
     prompt: "select_account"
 })
 
+// Create an auth instance
 export const auth = getAuth();
+
+// Create a google pop up that returns a 
+// function that takes in the auth and provider instance
 export const signInWithGooglePopup = () => {
     return signInWithPopup(auth,provider)
 }
 
+// Create a firestore instance
 export const db = getFirestore();
 
 export type ObjectToAdd = {
@@ -76,16 +84,29 @@ export type AdditionalInformation = {
   displayName?: string;
 }
 
+// Obtain auth object from Google Sign in and pass it in this
+// function to create this user document 
+// The additional information over here contains displayName since
+// there is no displayName in the userAuth object obtained from 'Sign up with
+// email and password' option
 export const createUserDocumentFromAuth = async(userAuth: User, additionalInfo = 
   {} as AdditionalInformation) : Promise<void | QueryDocumentSnapshot<UserData>> => {
+  // From the db and users collection, obtain the document reference based
+  // on userAuth.uid 
    const userDocRef = doc(db, 'users', userAuth.uid)
+  //  Use 'getDoc' to obtain data from the document reference
    const userSnapShot = await getDoc(userDocRef)
    
+  // Check if any data exists
    if(!userSnapShot.exists()){
+    // Destructure auth object
      const { displayName, email } = userAuth;
+    // Create a variable that corresponds to a new field in the db
      const createdAt = new Date()
 
      try{
+        // Use 'setDoc' function to add these data at that particular
+        // document reference
         await setDoc(userDocRef, {
             displayName, email, createdAt, ...additionalInfo
         })
@@ -93,18 +114,21 @@ export const createUserDocumentFromAuth = async(userAuth: User, additionalInfo =
         console.log('error', error)
      }
    }
-
+   
+  //  Return user data from the db
    return userSnapShot as QueryDocumentSnapshot<UserData>
 }
 
+// Create a user with email and password 
 export const registerUserWithEmailAndPassword = async(email: string, password: string) => {
   if(!email || !password){
     throw new Error('Please provide an email and password')
-  }
+  } 
   const userCredential = await createUserWithEmailAndPassword(auth,email, password)
   return userCredential
 }
 
+// Once signed up, signing up with email and password
 export const logInWithEmailAndPassword = async(email: string, password: string) => {
   if(!email || !password){
     throw new Error('Please provide an email and password')
