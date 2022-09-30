@@ -30,25 +30,21 @@ npm run start
 
 ## Setting up google sign in authentication in Firebase Firebase
 
-*Refer to firebase utils folder : src/utils/firebase/firebase.utils*
+**Refer to firebase utils folder : src/utils/firebase/firebase.utils**
 
-1. You can use different services to enable the user to signIn
-2. Over here, we shall use sign in with email and sign in with google 
-3. In the firbase console for the app, click on the *Authentication* tab.
-4. Click on *Sign-in-method* and click on *Google* .
-5. Toogle on enable Sign-in.
-6. In the authorized domain, are a list of default domains that allow the
-   application to use Google Sign-In
-7. Choose an email of yours to recieve support emails.
+1. In the firbase console of the app, click on the *Authentication* tab.
+2. Click on *Sign-in-method* and click on *Google* .
+3. Toogle on enable Sign-in.
+4. A list of default domains are provided that allow the application to use Google Sign-In
+7. Choose your email to recieve support emails.
 8. Hit *Save* and check if Google has been enabled in Sign-in-providers.
 
 ## Setting up email/password sign in authentication in Firebase
 
-Refer to sign up component
-
 1. In the firbase console for the app, click on the *Authentication* tab.
 2. Click on *Sign-in-method* and click on *Email/Password* and toggle to enable it.
 
+**Refer to SignIn and SignUp components : src/components/Forms** for implementation
 
 ## Setting up firestore
 
@@ -59,6 +55,9 @@ Refer to sign up component
 5. Click *Enable*
 6. Once in the database, click on the *Rules* tab and
    change allow read, write: if *false* to *true* and hit *Publish*
+
+**Refer to SignIn and SignUp components : src/components/Forms** to obtain user
+credentials from Authentication service and to create a user in firestore   
    
 
 ## Redux setup for global state management
@@ -69,6 +68,7 @@ Refer to sign up component
 
 1. useSelector() is used to extract a specific part of the state that
    would be required for the component to use
+2. 
 
 
 
