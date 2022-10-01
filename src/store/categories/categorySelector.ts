@@ -7,16 +7,19 @@ import { RootState } from '../store';
 
 const selectCategoryReducer = (state : RootState) : CategoriesState => state.categories
 
+// Create cached selector for categories
 export const selectCategories = createSelector(
     [selectCategoryReducer],
     (categorySlice) => categorySlice.categories
 )
 
+// Create cached selector for loading
 export const selectCategoriesIsLoading = createSelector(
     [selectCategoryReducer],
     (categorySlice) => categorySlice.isLoading
 )
 
+// Create cached selector that transforms categories data to categories map data
 export const selectCategoriesMap = createSelector(
     [selectCategories],
     (categories) : CategoryMap => categories.reduce((acc,category) => {

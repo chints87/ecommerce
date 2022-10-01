@@ -10,7 +10,11 @@ import styles from './Checkout.module.scss'
 
 function Checkout() {
   // const { cartItems, addItemToCart, removeItemFromCart, deleteItemFromCart, totalItemsCost } = useContext(CartIconContext)
+  
+  // Use selectCartItems value from selector
   const cartItems = useSelector(selectCartItems)
+
+  // Use selectTotalCostItems value from selector
   const totalItemsCost = useSelector(selectTotalCostItems)
   const dispatch = useDispatch()
   return (

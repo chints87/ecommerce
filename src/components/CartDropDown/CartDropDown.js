@@ -12,6 +12,7 @@ import CartItem from '../CartItem/CartItem'
 
 function CartDropDown() {
   // const { cartItems } = useContext(CartIconContext)
+  // Get cartItems from the selector
   const cartItems = useSelector(selectCartItems)
   const navigate = useNavigate()
 

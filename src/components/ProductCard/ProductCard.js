@@ -10,6 +10,8 @@ import { selectCartItems } from '../../store/cart/cartSelector';
 
 function ProductCard({product}) {
   // const { addItemToCart } = useContext(CartIconContext);
+  
+  // Get cartItems from the selector
   const cartItems = useSelector(selectCartItems)
   const dispatch = useDispatch()
   const {name, price, imageUrl} = product;

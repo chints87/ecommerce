@@ -13,7 +13,10 @@ export default function CartIcon() {
   // const { cartIcon, cartCountItem, setCartIcon } = useContext(CartIconContext);
   const dispatch = useDispatch()
   
+  // Get cartIcon value from the selector
   const cartIcon = useSelector(selectIsCartOpen);
+
+  // Get total count of items from the selector 
   const cartCountItem = useSelector(selectCountCartItems)
   
 

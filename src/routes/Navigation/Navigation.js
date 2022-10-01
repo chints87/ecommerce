@@ -18,6 +18,8 @@ const Navigation = () => {
   // const { currentUser } = useContext(UserContext);
   const dispatch = useDispatch()
   const currentUser = useSelector((state) => state.user.currentUser)
+
+  // Get cartIcon value from the selector 
   const cartIcon = useSelector(selectIsCartOpen)
     return (
     <>

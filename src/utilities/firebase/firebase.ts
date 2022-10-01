@@ -41,30 +41,42 @@ export type ObjectToAdd = {
   title: string
 }
 
+// Add existing data on front-end to db
 export const addCollectionAndDocuments = async<T extends ObjectToAdd>
 (collectionKey : string, objectsToAdd : T[]) : Promise<void> => {
+  // Create a collection reference from the collection i.e. collection key
   const collectionRef = collection(db, collectionKey)
+  // Create a batch instance to create a transaction to the db
   const batch = writeBatch(db)
+  
 
   objectsToAdd.map((object) => {
+    // Create a document reference based on the 'title' field
     const docRef = doc(collectionRef, object.title.toLowerCase())
+    // Set the docRef with the object
     batch.set(docRef,object)
     return null    
   })
-
+  
+  // Fire off the the different batch sets to write on the db
   await batch.commit();
   console.log('done')
 }
 
-
+// Fetch categories and documents from the db
 export const getCategoriesAndDocuments = async(): Promise<Category[]> => {
+  // Get collection reference from the db
   const collectionRef = collection(db, 'categories');
+  // Create a query from the collection reference
   const q = query(collectionRef);
-
-  const querySnapShots = await getDocs(q) 
+  
+  // Fetch all document snapshots in the collection
+  const querySnapShots = await getDocs(q)
+  
+  // Extract data from each document by mapping from documents i.e querySnapShots.docs
   return querySnapShots.docs.map((docSnapShot) => docSnapShot.data() as Category)
   
-  // reduce((acc,docSnapShot) => {
+  // const categoryMap = querySnapShots.docs.reduce((acc,docSnapShot) => {
   //   const { title, items } = docSnapShot.data();
   //   acc[title.toLowerCase()] = items;
   //   return acc
