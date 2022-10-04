@@ -23,14 +23,19 @@ export const fetchCategoriesFailed = withMatcher((error : Error) : FetchCategori
 
 export type CategoryAction = FetchCategoriesStart | FetchCategoriesSuccess | FetchCategoriesFailed
 
+// Using redux-thunk to dispatch different actions for a
+// async call
 // export const fetchCategoriesAsync = () => async(dispatch) => {
+//    // Update reducer to show loading state
 //     dispatch(fetchCategoriesStart());
 //     try {
        
 //         const categoriesArray = await getCategoriesAndDocuments(); 
+//         // Update reducer to add categories array state and change loading status state
 //         dispatch(fetchCategoriesSuccess(categoriesArray));
         
 //     } catch (error) {
+          // Update reducer to show user error state and change loading state  
 //         dispatch(fetchCategoriesFailed(error))
 //     }   
 

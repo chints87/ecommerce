@@ -19,6 +19,7 @@ function Checkout() {
   const dispatch = useDispatch()
   return (
     <div className={styles.container}>
+     {/* Map cartItems to display item details and for each item the added functionailty to add, remove or delele from cart */}
      {cartItems.map((cartItem) => {
        const { name, quantity, price, id } = cartItem
        return (
@@ -33,6 +34,7 @@ function Checkout() {
        )
      })}
      <span>Total : {totalItemsCost}</span>
+     {/* Stripe payment checkout */}
      <PaymentForm />
     </div>
   )

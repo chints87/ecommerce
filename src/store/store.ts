@@ -22,18 +22,18 @@ export type RootState = ReturnType<typeof rootReducer>
 
 const sagaMiddleware = createSagaMiddleware()
 
-
+// Add process.env to developoment when using logger middleware
 const middleWares = [process.env.NODE_ENV === 'development' && logger, sagaMiddleware]
 .filter((middleware) : middleware is Middleware  => Boolean(middleware))
 
+// Display redux devtool on the browser during development
 const composedEnhancer = (process.env.NODE_ENV === 'development' && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
 
 // Additional functionality added using compose to add middlwares
 const composedEnhancers = composedEnhancer(applyMiddleware(...middleWares))
 
 // Setting up configuration to store state in the 
-// localstorage of the browser, to save data
-// on refresh 
+// localstorage of the browser
 const persistConfig : ExtendedPersistConfig = {
     key: 'root',
     storage,
@@ -48,4 +48,5 @@ export const store = createStore(persistedReducer, undefined, composedEnhancers)
 
 sagaMiddleware.run(rootSaga);
 
+// Create a persisted Store
 export const persistor = persistStore(store)

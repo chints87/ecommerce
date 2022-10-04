@@ -22,6 +22,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      {/* Provide persisted store. Can add a loading attribute 
+        to show a loading icon when reducer are rehydrating */}
       <PersistGate persistor={persistor}>
         <BrowserRouter>
           {/* <UserProvider>         */}

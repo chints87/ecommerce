@@ -67,9 +67,10 @@ credentials from Authentication service and to create a user in firestore
 **Refer to /index.js to pass store in a Provider component to provide application with global state**
 
 1. useSelector() hook extracts a slice of the state that
-   would be required for the component 
-2. Ensure when action updates reducer file, it receives raw data from the API.
-3. Apply data transformations in the selector file for the specific reducer folder.
+   would be required for the component. 
+2. Ensure action updates reducer file with API data in its raw format.
+3. Apply data transformations on raw data from API in the selector file for the specific reducer folder.
+
 
 
 
