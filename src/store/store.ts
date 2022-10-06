@@ -20,6 +20,7 @@ export type ExtendedPersistConfig = PersistConfig<RootState> & {
 
 export type RootState = ReturnType<typeof rootReducer>
 
+// Create saga middlware
 const sagaMiddleware = createSagaMiddleware()
 
 // Add process.env to developoment when using logger middleware
@@ -46,6 +47,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 // Create store that will be passed to the Provider in index.js
 export const store = createStore(persistedReducer, undefined, composedEnhancers)
 
+// Pass rootSage 
 sagaMiddleware.run(rootSaga);
 
 // Create a persisted Store

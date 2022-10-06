@@ -69,7 +69,6 @@ export const getCategoriesAndDocuments = async(): Promise<Category[]> => {
   const collectionRef = collection(db, 'categories');
   // Create a query from the collection reference
   const q = query(collectionRef);
-  
   // Fetch all document snapshots in the collection
   const querySnapShots = await getDocs(q)
   
@@ -155,6 +154,7 @@ export const onAuthStateChangedListener = (callback : NextOrObserver<User>) => {
   return onAuthStateChanged(auth, callback)
 }
 
+// Change from observable listener to prmoise based function
 export const getCurrentUser = () : Promise<User | null> => {
   return new Promise((resolve, reject) => {
     const unsuscribe = onAuthStateChanged(
